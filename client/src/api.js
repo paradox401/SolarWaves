@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE = import.meta.env.VITE_API_URL || 'https://solarwaves.onrender.com';
 
 export const apiRequest = async (path, options = {}, token) => {
   const response = await fetch(`${API_BASE}${path}`, {

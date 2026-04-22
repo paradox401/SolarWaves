@@ -5,7 +5,7 @@ import { ensureAdmin } from './seed/ensureAdmin.js';
 
 dotenv.config();
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8000;
 
 const start = async () => {
   await connectDb();
