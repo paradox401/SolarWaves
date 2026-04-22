@@ -12,13 +12,25 @@ dotenv.config();
 
 export const app = express();
 
+const allowedOrigins = process.env.CLIENT_URL
+  ? process.env.CLIENT_URL.split(',').map((item) => item.trim())
+  : [];
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL
-      ? process.env.CLIENT_URL.split(',').map((item) => item.trim())
-      : true,
-  }),
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('CORS not allowed'));
+      }
+    },
+    credentials: true,
+  })
 );
+
+app.options('*', cors()); // handle preflight
+
 app.use(helmet());
 app.use(morgan('dev'));
 app.use(express.json());
