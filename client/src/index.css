@@ -1,0 +1,68 @@
+:root {
+  --text-main: #f6fbff;
+  --text-strong: #fffdf6;
+  --surface: rgba(8, 22, 33, 0.72);
+  --surface-border: rgba(255, 255, 255, 0.12);
+  --page-bg:
+    radial-gradient(circle at top, rgba(242, 143, 59, 0.24), transparent 30%),
+    linear-gradient(135deg, #041724 0%, #082032 32%, #0a3b52 65%, #f28f3b 140%);
+  font-family: 'Trebuchet MS', 'Avenir Next', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--text-main);
+  background: #03131e;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root[data-theme='light'] {
+  --text-main: #183040;
+  --text-strong: #10202b;
+  --surface: rgba(248, 251, 255, 0.76);
+  --surface-border: rgba(16, 32, 43, 0.1);
+  --page-bg:
+    radial-gradient(circle at top, rgba(242, 143, 59, 0.18), transparent 32%),
+    linear-gradient(135deg, #f6fbff 0%, #e8f3fa 38%, #dceef6 68%, #ffe3c2 140%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+strong {
+  color: var(--text-strong);
+}
+
+#root {
+  min-height: 100vh;
+}
