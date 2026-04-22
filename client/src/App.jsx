@@ -63,7 +63,7 @@ function AuthPanel({ mode, onAuthenticated }) {
     setError('');
 
     try {
-      const data = await apiRequest('/auth/login', {
+      const data = await apiRequest('/api/auth/login', {
         method: 'POST',
         body: JSON.stringify(form),
       });
@@ -144,7 +144,7 @@ function PlayerView({ session, onLogout, onSessionUpdate }) {
     dashboard?.transactions?.filter((item) => item.amount > 0).slice(0, 5) ?? [];
 
   const refreshDashboard = useCallback(async () => {
-    const data = await apiRequest('/game/dashboard', {}, session.token);
+    const data = await apiRequest('/api/game/dashboard', {}, session.token);
     startTransition(() => {
       setDashboard(data);
       onSessionUpdate((current) => {
@@ -427,9 +427,9 @@ function AdminView({ session, onLogout }) {
 
   const refresh = useCallback(async () => {
     const [overviewData, usersData, activityData] = await Promise.all([
-      apiRequest('/admin/overview', {}, session.token),
-      apiRequest(`/admin/users?search=${encodeURIComponent(deferredSearch)}`, {}, session.token),
-      apiRequest('/admin/activities', {}, session.token),
+      apiRequest('/api/admin/overview', {}, session.token),
+      apiRequest(`/api/admin/users?search=${encodeURIComponent(deferredSearch)}`, {}, session.token),
+      apiRequest('/api/admin/activities', {}, session.token),
     ]);
 
     startTransition(() => {
@@ -474,7 +474,7 @@ function AdminView({ session, onLogout }) {
 
     try {
       await apiRequest(
-        '/admin/users',
+        '/api/admin/users',
         {
           method: 'POST',
           body: JSON.stringify(createForm),
@@ -498,7 +498,7 @@ function AdminView({ session, onLogout }) {
 
     try {
       await apiRequest(
-        `/admin/users/${selectedUser.id}/${type}`,
+        `/api/admin/users/${selectedUser.id}/${type}`,
         {
           method: 'POST',
           body: JSON.stringify(pointForm),
@@ -524,7 +524,7 @@ function AdminView({ session, onLogout }) {
 
     try {
       await apiRequest(
-        `/admin/users/${selectedUser.id}/status`,
+        `/api/admin/users/${selectedUser.id}/status`,
         {
           method: 'PATCH',
           body: JSON.stringify({ status: nextStatus }),
@@ -544,7 +544,7 @@ function AdminView({ session, onLogout }) {
 
     try {
       await apiRequest(
-        '/admin/slot-settings',
+        '/api/admin/slot-settings',
         {
           method: 'PATCH',
           body: JSON.stringify(settingsForm),

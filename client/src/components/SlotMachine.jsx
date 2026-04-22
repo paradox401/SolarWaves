@@ -167,7 +167,7 @@ function SlotMachine({ token, config, onSpinComplete, preview = false }) {
       }
 
       const data = await apiRequest(
-        '/game/spin',
+        '/api/game/spin',
         {
           method: 'POST',
           body: JSON.stringify({ betAmount: effectiveBetAmount }),
