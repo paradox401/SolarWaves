@@ -12,6 +12,8 @@ dotenv.config();
 
 export const app = express();
 
+app.use(express.json());
+
 const allowedOrigins = process.env.CLIENT_URL
   ? process.env.CLIENT_URL.split(',').map((item) => item.trim())
   : [];
@@ -19,21 +21,21 @@ const allowedOrigins = process.env.CLIENT_URL
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('CORS not allowed'));
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
       }
+
+      console.log("Blocked by CORS:", origin);
+      return callback(null, false);
     },
     credentials: true,
   })
 );
 
-
-
 app.use(helmet());
 app.use(morgan('dev'));
-app.use(express.json());
 
 app.get('/api/health', (req, res) => {
   res.json({ ok: true });
